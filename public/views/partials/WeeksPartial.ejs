@@ -1,0 +1,48 @@
+<div class="OneWeekContainer">
+  <div class="AlbumsDiv AlbumHeader">
+      <div class="AlbumsDiv--Img">
+        <h3><img src="../images/album.png"/>АЛЬБОМЫ <span class="WeekNumberOnHead"><%= weekNumber %></span> НЕДЕЛИ</h3>
+      </div>
+      <div class="AlbumsDiv_Info"></div>
+    </div>
+
+<% if (items.length>0) { %>
+  <% for(var i=0; i<items.length; i++) {%>
+    <div class="AlbumsDiv">
+      <div class="AlbumsDiv--Img">
+          <img src="<%= items[i].src %>"/>
+      </div>
+      <div class="AlbumsDiv_Info">
+        <div class="AlbumsDiv--Title">
+          <a href="#" name="modal" onclick="ShowModal(event, $( this ))"><%= items[i].title %></a>
+          <!--Модальное окно-->
+          <div class="boxes">
+            <div id="dialog" class="window">
+              <div class="top">
+                <span>Список песен в альбоме</span>
+                <a href="#" class="close" onclick="CloseModal(event)">&#215</a>
+              </div>
+              <div class="content"><%- items[i].mainText.replace(new RegExp('\r?\n','g'), '<br />') %></div>
+            </div>
+          </div>
+
+        </div>
+        <div class="AlbumsDiv--MiddleRating" title="Средний рейтинг альбома по оценкам слушателей">&#9733; <%= items[i].rate %></div>
+        <div class="AlbumsDiv--Genres"><%= items[i].Year %></div>
+        <div class="AlbumsDiv--PrevText"><%- items[i].preView.replace(new RegExp('\r?\n','g'), '<br />') %></div>
+      </div>
+    </div>
+  <% } %>
+
+  <div class="need-more-minerals">
+    <span id="fullWeekNumber" style="display:none;"><%= fullNumber %></span>
+    <span role="start_page:load_page" onclick="GetPrevPage();">
+      <i></i>
+      Travel back in time to <%= weekNumber - 1 %> week
+    </span>
+  </div>
+</div>
+<% } else { %>
+    <h3>НЕТ АЛЬБОМОВ ДЛЯ ВЫБРАННОЙ НЕДЕЛИ</h3>
+    <br />
+<% } %>
