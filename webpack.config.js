@@ -11,7 +11,8 @@ module.exports = {
         port: 3000
     },
     */
-    devtool: 'cheap-module-eval-source-map',
+    //devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     entry: './public/dev/js/index.js',
     module: {
         loaders: [
