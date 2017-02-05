@@ -1,5 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
+//var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 module.exports = {
     /*
@@ -25,6 +27,23 @@ module.exports = {
         filename: 'build/js/bundle.min.js'
     },
     plugins: [
-        new webpack.optimize.OccurrenceOrderPlugin()
+        //new BundleAnalyzerPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.NoErrorsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            comments: false,
+            compress: {
+                unused: true,
+                dead_code: true,
+                warnings: false,
+                drop_debugger: true,
+                conditionals: true,
+                evaluate: true,
+                drop_console: true,
+                sequences: true,
+                booleans: true,
+            }
+        })
     ]
 };

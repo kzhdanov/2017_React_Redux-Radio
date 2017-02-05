@@ -21,7 +21,7 @@ class Body extends Component {
 
 	render() {
 		var imgStyle = {
-      		backgroundImage: "url(" + this.props.content.src + ")"
+      		backgroundImage: "url(" + this.props.content.src.replace(/ /g,'%20') + ")"
     	};
     	console.log(imgStyle)
 		return (
@@ -34,7 +34,7 @@ class Body extends Component {
 		        </div>
 			</div>
 			<div className='content_buttons'>
-				
+
 		    </div>
 	      </section>
    		)
