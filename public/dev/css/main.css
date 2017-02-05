@@ -146,4 +146,21 @@ body {
   position: relative;
   border-bottom: 1px solid #efefef;
   margin-bottom: 5px;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.wk_container-week-inner {
+  text-align: center;
+  background-color: #444;
+  opacity: .9;
+  color: gainsboro;
+  padding: 5px;
 }

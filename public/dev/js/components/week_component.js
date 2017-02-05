@@ -10,7 +10,11 @@ class Week extends Component {
 		console.log(el);
 		return (				
 			<div className='wk_container-week' style={{backgroundImage: 'url(' + el.src + ')'}}>
-				{el.Year}
+				<div className='wk_container-week-inner'>
+					{el.BandName} <br />
+					{el.AlbumName} <br />
+					{el.Year + ', ' + el.Genres}
+				</div>
 			</div>
 		)
 	}

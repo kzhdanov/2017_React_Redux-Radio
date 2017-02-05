@@ -23,7 +23,7 @@ class Body extends Component {
 		var imgStyle = {
       		backgroundImage: "url(" + this.props.content.src.replace(/ /g,'%20') + ")"
     	};
-    	console.log(imgStyle)
+
 		return (
 	      <section className='content'>
 			<div className='content_img' style={imgStyle}>
