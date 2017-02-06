@@ -19,6 +19,18 @@ class Body extends Component {
 		});
 	}
 
+	AudioActions() {
+		if ( document.getElementById('cb').className.indexOf('content_button-play') !== -1 ) {
+			document.getElementById('cb').className = 'content_button content_button-stop';
+			document.getElementsByClassName('songInfo')[0].className = 'songInfo play-icon';
+			document.getElementsByTagName('audio')[0].play();
+		} else {
+			document.getElementById('cb').className = 'content_button content_button-play';
+			document.getElementsByClassName('songInfo')[0].className = 'songInfo';
+			document.getElementsByTagName('audio')[0].pause();
+		}
+	}
+
 	render() {
 		var imgStyle = {
       		backgroundImage: "url(" + this.props.content.src.replace(/ /g,'%20') + ")"
@@ -33,9 +45,8 @@ class Body extends Component {
 		          <div className="songInfo__album">{this.props.content.album}</div>
 		        </div>
 			</div>
-			<div className='content_buttons'>
-
-		    </div>
+			<div id='cb' className='content_button content_button-play' onClick={this.AudioActions.bind(this)}></div>
+			<audio src='http://eu3.radioboss.fm:8022/live' controls style={{display: 'none'}}/>
 	      </section>
    		)
 	}

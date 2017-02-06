@@ -27,6 +27,9 @@ body {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .content_img {
@@ -119,6 +122,17 @@ body {
   opacity: .9;
 }
 
+.play-icon:after {
+  content: ' ';
+  position: absolute;
+  background-image: url('../../images/radio.svg');
+  background-size: 100%;
+  width: 40px;
+  height: 40px;
+  top: 30px;
+  right: 10px;
+}
+
 .songInfo div {
   color: #FFF;
 }
@@ -163,4 +177,30 @@ body {
   opacity: .9;
   color: gainsboro;
   padding: 5px;
+}
+
+.content_button {
+  margin-top: 2.5rem;
+  width: 100px;
+  height: 100px;
+}
+
+.content_button-play {
+  background-image: url('../../images/play-button.svg');
+  background-size: 100%;
+}
+
+.content_button-play:hover {
+  background-image: url('../../images/play-button-hover.svg');
+  background-size: 100%;
+}
+
+.content_button-stop {
+  background-image: url('../../images/stop-button.svg');
+  background-size: 100%;
+}
+
+.content_button-stop:hover {
+  background-image: url('../../images/stop-button-hover.svg');
+  background-size: 100%;
 }
