@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import CONST from '../CONSTANTS';
 
 function WS (callback) {
-	let ws = new WebSocket('ws://localhost:8089');
+	let ws = new WebSocket(CONST._WS_URL);
 		ws.onmessage = ((message) => {
 			var res = JSON.parse(message.data);
 			
@@ -59,7 +60,7 @@ export default connect(
 	}),
 	dispatch => ({
 		setTitles(payload) {	
-			dispatch({ type: 'UPDATE_TITLES', payload });
+			dispatch({ type: CONST.UPDATE_TITLES, payload });
 		}
     }),
 )(Body);

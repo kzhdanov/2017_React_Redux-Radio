@@ -56,8 +56,6 @@ let WSFunc = {
               client.send(JSON.stringify(resultCash));
             });
           }
-
-          //console.log(result);
         },
 
         error => console.log('Rejected: ' + error.message)
