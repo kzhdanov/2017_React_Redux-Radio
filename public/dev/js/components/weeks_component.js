@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Week from './week_component';
+import CONST from '../CONSTANTS';
 
 function getWeeks() {
 	  	return dispatch => {
-		    return fetch('http://localhost:8081/weeks')
+		    return fetch(CONST._GET_WEEKS)
 		    .then(response => response.json())
-		    .then(payload => dispatch({ type: 'GET_WEEKS_REQUEST', payload }))
+		    .then(payload => dispatch({ type: CONST.GET_WEEKS_REQUEST, payload }))
 	  	}
 }
 
@@ -21,6 +22,9 @@ class Weeks extends Component {
 		if(this.props.weeks.fullNumber) {
 			return (
 		      <div className='wk_container-weeks'>
+		      	<div className='wk_container-weeks-number'>
+		      		{this.props.weeks.weekNumber}
+		      	</div>
 				{this.props.weeks.items.map((el) => 
 					<Week key={el.id} w={el}/>
 				)}
@@ -28,8 +32,8 @@ class Weeks extends Component {
 	    	);
 		} else {
 			return (
-				<div>
-					ololol
+				<div className='wk_container-weeks'>
+					<div className='loader'></div>
 				</div>
 	    	);
 		}
