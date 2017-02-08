@@ -227,3 +227,29 @@ body {
   margin-top: 100px;
 }
 
+.down-arrow {
+    margin: 20px 0; 
+    cursor: pointer;
+    width: 30px;
+    height: 18px;
+    background: url(../../images/arrow-down.png) no-repeat;
+    -webkit-animation: move 1.2s infinite .4s alternate;
+    animation: move 1.2s infinite .4s alternate;
+    z-index: 99999;
+}
+
+.down-arrow:hover {
+    background: url(../../images/arrow-down-hover.png) no-repeat;
+}
+@-webkit-keyframes move {
+  100% {
+      -webkit-transform: translate(0,-10px);
+      transform: translate(0,-10px);
+  }
+}
+@keyframes move {
+  100% {
+      -webkit-transform: translate(0,-10px);
+      transform: translate(0,-10px);
+  }
+}

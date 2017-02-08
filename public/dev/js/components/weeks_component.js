@@ -6,8 +6,25 @@ import CONST from '../CONSTANTS';
 function getWeeks() {
 	  	return dispatch => {
 		    return fetch(CONST._GET_WEEKS)
-		    .then(response => response.json())
+			.then(response => response.json())
 		    .then(payload => dispatch({ type: CONST.GET_WEEKS_REQUEST, payload }))
+	  	}
+}
+
+function getPrevWeek(weekNum) {
+	return dispatch => {
+		    return fetch(CONST._GET_PREV_WEEK, {
+			   	method: 'POST', 
+				mode: 'cors', 
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+				    week: Number(weekNum-1),
+				})
+			})
+		    .then(response => response.json())
+		    .then(payload => dispatch({ type: CONST.GET_PREV_WEEK_REQUEST, payload }))
 	  	}
 }
 
@@ -19,15 +36,27 @@ class Weeks extends Component {
 	}
 
 	render() {
-		if(this.props.weeks.fullNumber) {
+		if(this.props.weeksObj.wn != null) {
 			return (
 		      <div className='wk_container-weeks'>
-		      	<div className='wk_container-weeks-number'>
-		      		{this.props.weeks.weekNumber}
-		      	</div>
-				{this.props.weeks.items.map((el) => 
-					<Week key={el.id} w={el}/>
+				{ this.props.weeksObj.weeks.map((week) =>
+					<div key={week.weekNumber}>
+				      	<div className='wk_container-weeks-number'>
+				      		{ week.weekNumber }
+				      	</div>
+						{ week.items.map((el) => <Week key={el.id} w={el}/>) }
+					</div>
 				)}
+
+				{ !this.props.weeksObj.isEnd ?  
+					<div className="down-arrow" title={ 'Travel back in time to ' + 
+						Number(this.props.weeksObj.wn - 1) + ' week'} 
+	 						onClick={this.props.getPrevWeekDispatch
+	 								 .bind(this.props.weeksObj.fn)}>
+			 		</div> 
+			 		:
+			 		<p>Ophhhh... seems it was the latest week!</p>
+		 		}
 		      </div>
 	    	);
 		} else {
@@ -42,7 +71,7 @@ class Weeks extends Component {
 
 function mapStateToProps(state) {
 	return {
-		weeks: state.Weeks,
+		weeksObj: state.Weeks,
 	};
 }
 
@@ -51,6 +80,9 @@ export default connect(
 	dispatch => ({
 		getWeeksAction() {
 			dispatch(getWeeks());
+		},
+		getPrevWeekDispatch() {
+			dispatch(getPrevWeek(this));
 		}
     }),
 )(Weeks);

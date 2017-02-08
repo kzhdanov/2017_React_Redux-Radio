@@ -265,12 +265,12 @@ app.post('/weeks/getPrev', function (req, res) {
             data.map((e, i) => {
               e.rate = rates[i];
             });
-            res.render('./partials/WeeksPartial.ejs',
-            {
+            
+            res.send(JSON.stringify({
               items: data,
               weekNumber: Number(weekNumber).toString().substring(2),
               fullNumber: Number(weekNumber),
-            });
+            }));
           });
         } else {
           console.log(err);
