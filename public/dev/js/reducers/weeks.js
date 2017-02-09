@@ -1,16 +1,20 @@
 export default function weeks (state = {}, action) {
 	switch(action.type) {
 		case 'GET_WEEKS_REQUEST': 
-			return { 
-				wn: action.payload.weekNumber,
-				fn: action.payload.fullNumber,
-				isEnd: false,
-				weeks:
-				[
-		      		...state,
-		      		action.payload 
-		      	],
-		    };
+			if (!state.weeks) {
+				return { 
+					wn: action.payload.weekNumber,
+					fn: action.payload.fullNumber,
+					isEnd: false,
+					weeks:
+					[
+			      		...state,
+			      		action.payload 
+			      	],
+			    };
+		    } else {
+		    	return state;
+		    }
 			break;
 		case 'GET_PREV_WEEK_REQUEST':
 			return { 
