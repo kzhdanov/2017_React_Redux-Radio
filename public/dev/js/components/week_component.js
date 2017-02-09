@@ -7,7 +7,7 @@ class Week extends Component {
 
 	render() {
 		const el = this.props.w;
-		console.log(el);
+
 		return (				
 			<div className='wk_container-week' style={{backgroundImage: 'url(' + el.src + ')'}}>
 				<div className='wk_container-week-inner'>
