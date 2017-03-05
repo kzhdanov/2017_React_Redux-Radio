@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Cormorant Bold';
+  src: local('Cormorant Bold'), local('CormorantBold'),
+    url('../fonts/Cormorant-Bold.ttf') format('truetype');
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -11,28 +17,35 @@ body {
 .header {
   display: -webkit-flex;
   display: -ms-flexbox;
+  display: -webkit-box;
   display: flex;
   background-color: #f1f1f1;
   width: 100%;
   height: 50px;
   -webkit-align-items: center;
       -ms-flex-align: center;
+          -webkit-box-align: center;
           align-items: center;
 }
 
 .content {
   display: -webkit-flex;
   display: -ms-flexbox;
+  display: -webkit-box;
   display: flex;
   margin-top: 20px;
   -webkit-align-items: center;
       -ms-flex-align: center;
+          -webkit-box-align: center;
           align-items: center;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
+          -webkit-box-pack: center;
           justify-content: center;
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
           flex-direction: column;
 }
 
@@ -97,6 +110,7 @@ body {
   width: 320px;
   left: 0;
   top: 50px;
+  height: -webkit-calc(100% - 50px);
   height: calc(100% - 50px);
   background-color: #f1f1f1;
 }
@@ -107,7 +121,6 @@ body {
 
 .wk_container-visible {
   display: visible;
-  box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
   z-index: 999999;
   overflow-y: scroll;
 }
@@ -146,15 +159,20 @@ body {
 .wk_container-weeks {
   display: -webkit-flex;
   display: -ms-flexbox;
+  display: -webkit-box;
   display: flex;
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
           flex-direction: column;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
+          -webkit-box-pack: center;
           justify-content: center;
   -webkit-align-items: center;
       -ms-flex-align: center;
+          -webkit-box-align: center;
           align-items: center;
 }
 
@@ -168,12 +186,15 @@ body {
   margin-bottom: 5px;
   -webkit-align-items: center;
       -ms-flex-align: center;
+          -webkit-box-align: center;
           align-items: center;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
+          -webkit-box-pack: center;
           justify-content: center;
   display: -webkit-flex;
   display: -ms-flexbox;
+  display: -webkit-box;
   display: flex;
 }
 
@@ -185,6 +206,7 @@ body {
   color: black;
   padding: 5px;
   background: #FDF6E8;
+  background: -webkit-linear-gradient(left, #FDF6E8 0%,#F6F6F6 100%);
   background: linear-gradient(to right, #FDF6E8 0%,#F6F6F6 100%);
 }
 
@@ -252,4 +274,70 @@ body {
       -webkit-transform: translate(0,-10px);
       transform: translate(0,-10px);
   }
+}
+
+#menu-button {
+  width: 20px;
+  height: 20px;
+  max-height: 20px;
+  max-width: 20px;
+  padding: 15px;
+  -webkit-transition: background .9s cubic-bezier(.18,1,.21,1);
+  transition: background .9s cubic-bezier(.18,1,.21,1);
+  margin: 0;
+  z-index: 3;
+}
+.menu-container {
+  cursor: pointer;
+}
+.menu-container:hover #menu-button {
+  background-color: #FFF;
+}
+.menu-container:hover .menu-text {
+  background-color: #FFF;
+  color: #8F7F59;
+}
+.menu-container:hover .menu-line {
+  background-color: #8F7F59;
+  width: 100%!important;
+}
+#menu-button #first-line {
+  width: 50%;
+}
+#menu-button .menu-line {
+  background-color: #8F7F59;
+  height: 3px;
+  margin-bottom: 4px;
+  -webkit-transition: all cubic-bezier(.18,1,.21,1) .9s;
+  transition: all cubic-bezier(.18,1,.21,1) .9s;
+}
+#menu-button #second-line {
+  width: 90%;
+  -moz-opacity: 1;
+  -khtml-opacity: 1;
+  opacity: 1;
+}
+#menu-button #third-line {
+  width: 70%;
+}
+#menu-button .menu-line {
+  -webkit-transition: all cubic-bezier(.18,1,.21,1) .9s;
+  -moz-transition: all cubic-bezier(.18,1,.21,1) .9s;
+}
+.menu-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.menu-text {
+  padding: 16px 20px;
+  color: #8F7F59;
+  letter-spacing: 2px;
+  font-family: 'Cormorant Bold';
+  font-size: 18px;
 }
