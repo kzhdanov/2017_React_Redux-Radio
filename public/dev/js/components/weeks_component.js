@@ -43,6 +43,7 @@ class Weeks extends Component {
 					<div key={week.weekNumber}>
 				      	<div className='wk_container-weeks-number'>
 				      		{ week.weekNumber }
+				      		<div className='wk_container-weeks-line'></div>
 				      	</div>
 						{ week.items.map((el) => <Week key={el.id} w={el}/>) }
 					</div>
