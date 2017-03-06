@@ -3,6 +3,11 @@
   src: local('Cormorant Bold'), local('CormorantBold'),
     url('../fonts/Cormorant-Bold.ttf') format('truetype');
 }
+@font-face {
+  font-family: 'Cormorant Regular';
+  src: local('Cormorant Regular'), local('CormorantRegular'),
+    url('../fonts/Cormorant-Regular.ttf') format('truetype');
+}
 
 body {
   padding: 0;
@@ -66,39 +71,8 @@ body {
   color: #B8B8B8;
 }
 
-.wk_icon-passive:before {
-  content: 'III';
-  position: absolute;
-  font-family: sans-serif;
-  width: 18px;
-  height: 18px;
-  box-sizing: border-box;
-  text-align: center; 
-  left: 10px;
-  line-height: 2;
-  -ms-transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
-}
-
 .wk_icon-active {
-  color: #666666;
-}
-
-.wk_icon-active:before {
-  color: #666666;
-  content: ' ';
-  position: absolute;
-  line-height: 2;
-  box-sizing: border-box;
-  text-align: center; 
-  left: 5px;
-  width: 18px;
-  height: 18px;
-  font-size: 21px;
-  background: url('../../images/x.svg') no-repeat;
-  background-size: 100%;
-  top: 2px;
+  background-color: #FFF;
 }
 
 .wk_icon:hover {
@@ -115,6 +89,10 @@ body {
   background-color: #f1f1f1;
 }
 
+.wk_openblock-invisible {
+  opacity: 0;
+}
+
 .wk_container-invisible {
   display: none;
 }
@@ -123,6 +101,7 @@ body {
   display: visible;
   z-index: 999999;
   overflow-y: scroll;
+  background-color: #FFF;
 }
 
 .songInfo {
@@ -196,25 +175,51 @@ body {
   display: -ms-flexbox;
   display: -webkit-box;
   display: flex;
+  border-radius: 100%;
+}
+
+.wk_container-week:before {
+  content: ' ';
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  background: #FFF;
+  border-radius: 100%;
+  border: 3px solid #efefef;
+  top: -webkit-calc(50% - 26px);
+  top: calc(50% - 26px);
+  left: -webkit-calc(50% - 26px);
+  left: calc(50% - 26px);
 }
 
 .wk_container-week-inner {
   width: 100%;
   text-align: center;
-  background-color: #444;
-  opacity: .9;
+  opacity: .8;
   color: black;
   padding: 5px;
-  background: #FDF6E8;
-  background: -webkit-linear-gradient(left, #FDF6E8 0%,#F6F6F6 100%);
-  background: linear-gradient(to right, #FDF6E8 0%,#F6F6F6 100%);
+  font-family: 'Cormorant Regular';
+  font-size: 20px;
+  background-color: #f1f1f1;
 }
 
 .wk_container-weeks-number {
-  width: 100%;
-  text-align: right;
+  width: 280px !important;
+  text-align: left;
+  padding: 0 0 0 15px;
+  font-size: 26px;
+  font-family: 'Cormorant Bold';
+  color: #8F7F59;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
-
+.wk_container-weeks div { width: 100%; }
 .content_button {
   margin-top: 2.5rem;
   width: 100px;
@@ -250,9 +255,9 @@ body {
 }
 
 .down-arrow {
-    margin: 20px 0; 
+    margin: 40px 0 20px 0; 
     cursor: pointer;
-    width: 30px;
+    width: 30px !important;
     height: 18px;
     background: url(../../images/arrow-down.png) no-repeat;
     -webkit-animation: move 1.2s infinite .4s alternate;
@@ -282,17 +287,13 @@ body {
   max-height: 20px;
   max-width: 20px;
   padding: 15px;
-  -webkit-transition: background .9s cubic-bezier(.18,1,.21,1);
-  transition: background .9s cubic-bezier(.18,1,.21,1);
   margin: 0;
   z-index: 3;
 }
 .menu-container {
   cursor: pointer;
 }
-.menu-container:hover #menu-button {
-  background-color: #FFF;
-}
+
 .menu-container:hover .menu-text {
   background-color: #FFF;
   color: #8F7F59;
@@ -341,3 +342,44 @@ body {
   font-family: 'Cormorant Bold';
   font-size: 18px;
 }
+.close_popupX { display: none; }
+
+.close_popupX.wk_icon-active {
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  left:0;
+  top:5px;
+}
+.rotate_left {
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+  border: 1px solid #8F7F59;
+  position: absolute;
+  width: 24px;
+  top: 19px;
+  left: 12px;
+  background-color: #8F7F59;
+}
+.rotate_right {
+  -webkit-transform: rotate(135deg);
+      -ms-transform: rotate(135deg);
+          transform: rotate(135deg);
+  border: 1px solid #8F7F59;
+  position: absolute;
+  width: 24px;
+  top: 19px;
+  left: 12px;
+  background-color: #8F7F59;
+}
+.wk_container-weeks-line {
+    width: 252px !important;
+    height: 1px;
+    background-color: #8F7F59;
+    margin-left: 8px;
+    margin-top: 5px;
+}
+

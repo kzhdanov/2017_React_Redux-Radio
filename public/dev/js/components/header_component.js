@@ -6,8 +6,9 @@ class Header extends Component {
 	  super(props);
 	  
 	  this.state = {
-        classIcon: 'wk_icon-passive',
+        classIcon: '',
         classContainer: 'wk_container-invisible',
+        classVisible: '',
   	  };
 	}
 
@@ -16,11 +17,13 @@ class Header extends Component {
 			this.setState({
 				classIcon: 'wk_icon-active',
 				classContainer: 'wk_container-visible',
+				classVisible: 'wk_openblock-invisible',
 			});
 		} else {
 			this.setState({
-				classIcon: 'wk_icon-passive',
+				classIcon: '',
 				classContainer: 'wk_container-invisible',
+				classVisible: '',
 			});
 		}
 		/*
@@ -34,12 +37,16 @@ class Header extends Component {
 	    return (
 	      <section className='header'>
 	      	<div onClick={this.openCardWeek.bind(this)} className='menu-container'>
-		      	<div id='menu-button'>
+		      	<div id='menu-button' className={this.state.classVisible}>
 		      		<div className='menu-line' id='first-line'></div>
 		      		<div className='menu-line' id='second-line'></div>
 		      		<div className='menu-line' id='third-line'></div>
 		      	</div>
-		      	<div className='menu-text'>НЕДЕЛИ</div>
+		      	<div className={this.state.classIcon + ' close_popupX'}>
+		      		<div className='rotate_left'></div>
+		      		<div className='rotate_right'></div>
+		      	</div>
+		      	<div className={this.state.classIcon + ' menu-text'}>НЕДЕЛИ</div>
 		    </div>
 
 	      	<div className={this.state.classContainer + ' wk_container'}>
