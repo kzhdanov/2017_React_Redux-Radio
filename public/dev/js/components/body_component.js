@@ -20,6 +20,14 @@ class Body extends Component {
 		});
 	}
 
+	componentDidMount() {
+		document.getElementsByClassName('content_img')[0].addEventListener('click', 
+			function(e) {
+				window.open('/window/new',"RadioAvance.ru",
+					"width=480,height=260,scrollbars=no,status=yes")
+			});
+	}
+
 	AudioActions() {
 		if ( document.getElementById('cb').className.indexOf('content_button-play') !== -1 ) {
 			document.getElementById('cb').className = 'content_button content_button-stop';

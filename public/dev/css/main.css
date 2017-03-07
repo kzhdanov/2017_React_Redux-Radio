@@ -8,11 +8,21 @@
   src: local('Cormorant Regular'), local('CormorantRegular'),
     url('../fonts/Cormorant-Regular.ttf') format('truetype');
 }
+@font-face {
+  font-family: 'Cormorant LightItalic';
+  src: local('Cormorant LightItalic'), local('CormorantLightItalic'),
+    url('../fonts/Cormorant-LightItalic.ttf') format('truetype');
+}
 
 body {
+  font-family: 'Cormorant Regular';
+  font-size: 18px;
   padding: 0;
   margin: 0;
   overflow: hidden;
+}
+a {
+  text-decoration: none;
 }
 
 #root {
@@ -38,7 +48,7 @@ body {
   display: -ms-flexbox;
   display: -webkit-box;
   display: flex;
-  margin-top: 20px;
+  margin-top: 55px;
   -webkit-align-items: center;
       -ms-flex-align: center;
           -webkit-box-align: center;
@@ -62,6 +72,26 @@ body {
   position: relative;
   border-radius: 20px 20px 20px 20px;
   border: 1px solid #efefef;
+  pointer-events: none;
+}
+
+.content_img:before {
+  width: 166px;
+  content: 'Radio in new window';
+  position: absolute;
+  top: -36px;
+  background-color: #f1f1f1;
+  left: 219px;
+  padding: 6px 20px;
+  cursor: pointer;
+  font-size: 19px;
+  -webkit-transition: all 1s linear;
+  transition: all 1s linear;
+  pointer-events: all;
+}
+.content_img:hover:before {
+  background-color: #D6D5D7;
+  color: #8F7F59;
 }
 
 .wk_icon {
@@ -119,6 +149,7 @@ body {
   border-radius: 0 0 20px 20px;
   opacity: .9;
 }
+.songInfo__song { opacity: .6; }
 
 .play-icon:after {
   content: ' ';
@@ -196,7 +227,6 @@ body {
   width: 100%;
   text-align: center;
   opacity: .8;
-  color: black;
   padding: 5px;
   font-family: 'Cormorant Regular';
   font-size: 20px;
@@ -224,6 +254,7 @@ body {
   margin-top: 2.5rem;
   width: 100px;
   height: 100px;
+  cursor: pointer;
 }
 
 .content_button-play {
@@ -249,9 +280,11 @@ body {
 .loader {
   background-image: url('../../images/gears.svg');
   background-size: 100%;
-  width: 100px;
-  height: 100px;
   margin-top: 100px;
+  width: 100%;
+  height: 400px;
+  margin-top: 100px;
+  background-repeat: no-repeat;
 }
 
 .down-arrow {
@@ -383,3 +416,108 @@ body {
     margin-top: 5px;
 }
 
+.menu-container:hover .rotate_right {
+  -webkit-animation: R 1.1s infinite;
+          animation: R 1.1s infinite;
+}
+
+.menu-container:hover .rotate_left {
+  -webkit-animation: L 1.1s infinite;
+          animation: L 1.1s infinite;
+}
+
+@-webkit-keyframes R {
+   25% {
+      -webkit-transform: rotate(145deg);
+              transform: rotate(145deg);
+  }
+  50% {
+      -webkit-transform: rotate(125deg);
+              transform: rotate(125deg);
+  }
+  75% {
+      -webkit-transform: rotate(135deg);
+              transform: rotate(135deg);
+  }
+}
+
+@keyframes R {
+   25% {
+      -webkit-transform: rotate(145deg);
+              transform: rotate(145deg);
+  }
+  50% {
+      -webkit-transform: rotate(125deg);
+              transform: rotate(125deg);
+  }
+  75% {
+      -webkit-transform: rotate(135deg);
+              transform: rotate(135deg);
+  }
+}
+
+@-webkit-keyframes L {
+  25% {
+      -webkit-transform: rotate(55deg);
+            transform: rotate(55deg);
+  }
+  50% {
+    -webkit-transform: rotate(35deg);
+            transform: rotate(35deg);
+  }
+  75% {
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+  }
+}
+
+@keyframes L {
+  25% {
+      -webkit-transform: rotate(55deg);
+            transform: rotate(55deg);
+  }
+  50% {
+    -webkit-transform: rotate(35deg);
+            transform: rotate(35deg);
+  }
+  75% {
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+  }
+}
+.footer {
+  font-size: 20px;
+  position: relative;
+  margin-top: 100px;
+  bottom: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: 'Cormorant LightItalic';
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.footer div { text-align: center; }
+.footer a { color: black !important; }
+.footer a:hover { color: #8F7F59 !important; }
+.footer_download {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 10px auto;
+  width: 360px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
