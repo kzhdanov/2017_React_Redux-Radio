@@ -17,6 +17,9 @@ class Footer extends Component {
 					<a href="https://eu3.radioboss.fm:2199/tunein/zepyxjeq8.pls" title="Winamp">winamp</a>
 				</div>
 			</div>
+			<div>
+				development &mdash; <a href="https://github.com/kzhdanov" target="_blank">k. zhdanov</a>
+			</div>
 	      </section>
    		)
 	}
