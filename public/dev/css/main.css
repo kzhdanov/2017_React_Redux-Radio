@@ -632,6 +632,7 @@ a {
   .content {
     margin-top: 20px;
   }
+  .input-range {display: none;}
   .content_img {
     width: 100%;
     border-radius: 0;
