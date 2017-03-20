@@ -5,6 +5,9 @@ class Footer extends Component {
 		return (
 	      <section className='footer'>
 			<div><a href='mailto:radioavance@hotmail.com'>radioavance@hotmail.com</a></div>
+			<div>
+				<a href="https://vk.com/radioavance" title="VK">vk.com/radioavance</a>
+			</div>
 			<div className='footer_download'>
 				<div>
 					<a href="https://eu3.radioboss.fm:2199/tunein/zepyxjeq8.pls" title="Itunes">itunes</a>
