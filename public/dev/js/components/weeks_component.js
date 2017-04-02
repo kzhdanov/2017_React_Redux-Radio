@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Week from './week_component';
-import CONST from '../CONSTANTS';
+import CONST from '../constants/CONSTANTS';
 
 function getWeeks() {
 	  	return dispatch => {

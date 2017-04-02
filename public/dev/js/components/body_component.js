@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CONST from '../CONSTANTS';
+import CONST from '../constants/CONSTANTS';
 import InputRange from 'react-input-range';
 
 function WS (callback) {
