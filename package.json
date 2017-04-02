@@ -23,6 +23,7 @@
     "babel-register": "^6.9.0",
     "basic-auth-connect": "^1.0.0",
     "body-parser": "^1.15.2",
+    "classnames": "^2.2.5",
     "compression": "^1.6.2",
     "cross-env": "^1.0.8",
     "css-loader": "^0.23.1",

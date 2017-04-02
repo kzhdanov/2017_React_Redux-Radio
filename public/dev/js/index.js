@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
-import Header from './containers/header_component';
+import Header from './containers/header_container';
 import Body from './components/body_component';
 import Footer from './components/footer_component';
 import allReducers from './reducers/index';
