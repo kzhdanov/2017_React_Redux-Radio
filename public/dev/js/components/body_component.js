@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CONST from '../constants/CONSTANTS';
 import InputRange from 'react-input-range';
+import { setTitles } from '../actions/body_actions';
 
 function WS (callback) {
 	let ws = new WebSocket(CONST._WS_URL);
@@ -76,14 +77,7 @@ class Body extends Component {
 	}
 }
 
-export default connect(
-	(state, ownProps) => ({
+export default connect((state, ownProps) => ({
 		content: state.Audio,
 		ownProps
-	}),
-	dispatch => ({
-		setTitles(payload) {	
-			dispatch({ type: CONST.UPDATE_TITLES, payload });
-		}
-    }),
-)(Body);
+	}), { setTitles })(Body);

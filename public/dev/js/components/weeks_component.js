@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import Week from './week_component';
 import CONST from '../constants/CONSTANTS';
 
-function getWeeks() {
-	  	return dispatch => {
+function getWeeksAction() {
+	return dispatch => {
 		    return fetch(CONST._GET_WEEKS)
 			.then(response => response.json())
 		    .then(payload => dispatch({ type: CONST.GET_WEEKS_REQUEST, payload }))
 	  	}
 }
 
-function getPrevWeek(weekNum) {
+function getPrevWeekDispatch(weekNum) {
 	return dispatch => {
 		    return fetch(CONST._GET_PREV_WEEK, {
 			   	method: 'POST', 
@@ -53,7 +53,7 @@ class Weeks extends Component {
 					<div className="down-arrow" title={ 'Travel back in time to ' + 
 						Number(this.props.weeksObj.wn - 1) + ' week'} 
 	 						onClick={this.props.getPrevWeekDispatch
-	 								 .bind(this.props.weeksObj.fn)}>
+	 								 .bind(null, this.props.weeksObj.fn)}>
 			 		</div> 
 			 		:
 			 		<p>Ophhhh... seems it was the latest week!</p>
@@ -76,14 +76,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(
-	mapStateToProps,
-	dispatch => ({
-		getWeeksAction() {
-			dispatch(getWeeks());
-		},
-		getPrevWeekDispatch() {
-			dispatch(getPrevWeek(this));
-		}
-    }),
-)(Weeks);
+export default connect( mapStateToProps, { getWeeksAction, getPrevWeekDispatch })(Weeks);
