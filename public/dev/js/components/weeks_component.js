@@ -2,38 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Week from './week_component';
 import CONST from '../constants/CONSTANTS';
-import { getWeeks } from '../actions/weeks_actions';
-
-function getWeeksAction() {
-	return dispatch => {
-		    return fetch(CONST._GET_WEEKS)
-			.then(response => response.json())
-		    .then(payload => dispatch(getWeeks(payload)))
-	  	}
-}
-
-function getPrevWeekDispatch(weekNum) {
-	return dispatch => {
-		    return fetch(CONST._GET_PREV_WEEK, {
-			   	method: 'POST', 
-				mode: 'cors', 
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-				    week: Number(weekNum-1),
-				})
-			})
-		    .then(response => response.json())
-		    .then(payload => dispatch({ type: CONST.GET_PREV_WEEK_REQUEST, payload }))
-	  	}
-}
+import { getFirstWeek, getPrevWeek } from '../actions/weeks_actions';
 
 class Weeks extends Component {
 	constructor(props) {
 		super(props);
 
-		this.props.getWeeksAction();
+		this.props.getFirstWeek();
 	}
 
 	render() {
@@ -53,7 +28,7 @@ class Weeks extends Component {
 				{ !this.props.weeksObj.isEnd ?  
 					<div className="down-arrow" title={ 'Travel back in time to ' + 
 						Number(this.props.weeksObj.wn - 1) + ' week'} 
-	 						onClick={this.props.getPrevWeekDispatch
+	 						onClick={this.props.getPrevWeek
 	 								 .bind(null, this.props.weeksObj.fn)}>
 			 		</div> 
 			 		:
@@ -77,4 +52,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect( mapStateToProps, { getWeeksAction, getPrevWeekDispatch })(Weeks);
+export default connect( mapStateToProps, { getFirstWeek, getPrevWeek })(Weeks);
