@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Week from './week_component';
 import CONST from '../constants/CONSTANTS';
+import { getWeeks } from '../actions/weeks_actions';
 
 function getWeeksAction() {
 	return dispatch => {
 		    return fetch(CONST._GET_WEEKS)
 			.then(response => response.json())
-		    .then(payload => dispatch({ type: CONST.GET_WEEKS_REQUEST, payload }))
+		    .then(payload => dispatch(getWeeks(payload)))
 	  	}
 }
 
