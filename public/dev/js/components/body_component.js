@@ -77,6 +77,11 @@ class Body extends Component {
 	}
 }
 
+Body.propTypes = {
+  content: React.PropTypes.object.isRequired,
+  setTitles: React.PropTypes.func.isRequired
+}
+
 export default connect((state, ownProps) => ({
 		content: state.Audio,
 		ownProps
