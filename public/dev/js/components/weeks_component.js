@@ -46,6 +46,12 @@ class Weeks extends Component {
 	}
 }
 
+Weeks.propTypes = {
+	weeksObj: React.PropTypes.object.isRequired,
+	getFirstWeek: React.PropTypes.func.isRequired,
+	getPrevWeek: React.PropTypes.func.isRequired
+}
+
 function mapStateToProps(state) {
 	return {
 		weeksObj: state.Weeks,
