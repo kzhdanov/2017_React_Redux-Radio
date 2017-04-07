@@ -4,11 +4,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
-import Header from './containers/header_container';
-import Body from './components/body_component';
-import Footer from './components/footer_component';
+import { Router, hashHistory } from 'react-router';
+import routes from './routers/index';
 import allReducers from './reducers/index';
 import thunkMiddleware from 'redux-thunk';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+injectTapEventPlugin();
 
 const store = createStore(
 	allReducers,
@@ -17,11 +19,7 @@ const store = createStore(
     
 ReactDOM.render(
 	<Provider store={store}>
-		<div>
-			<Header/>
-			<Body/>
-			<Footer />
-		</div>
+		<Router history={hashHistory} routes={routes} />
 	</Provider>,
     document.getElementById('root')
 );
