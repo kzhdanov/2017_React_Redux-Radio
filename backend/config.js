@@ -6,4 +6,5 @@ module.exports =
 	database: 'Radio',
 	user: 'Ivan',
 	password: 'Ivan_WWW2016@ru',
+	jwtSecret: 'somesecretkeyforjsonwebtoken'
 }
