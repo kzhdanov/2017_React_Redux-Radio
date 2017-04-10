@@ -5,8 +5,8 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import { Router, hashHistory } from 'react-router';
-import routes from './routers/index';
-import allReducers from './reducers/index';
+import routes from './routers';
+import allReducers from './reducers';
 import thunkMiddleware from 'redux-thunk';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 

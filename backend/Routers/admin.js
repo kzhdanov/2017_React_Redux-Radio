@@ -6,10 +6,32 @@ var mysql = require('mysql');
 var conf = require('../config');
 var utils = require('../Utils');
 var pool = mysql.createPool(conf);
-
+var jwt = require('jsonwebtoken');
+//import config from '../config';
 ///АДМИНИСТРАТИВНАЯ ЧАСТЬ///
+var tempAuth = {
+  login: 'Ivan',
+  password: 'EgorLetov@!'
+}
+
 var auth = basicAuth('Ivan', 'EgorLetov@!');
 var album = require('../Models/AlbumModel')(pool);
+
+///ЛОГИН
+router.post('/login', function (req, res) {
+  if(req.body) {
+    if(tempAuth.login === req.body.login && tempAuth.password === req.body.pass) {
+       var token = jwt.sign({
+          id: '3F75BB54-3C85-45D6-BD0C-A58EE779B8B5',
+          username: tempAuth.login
+        }, conf.jwtSecret);
+
+        return res.json({ token });
+    }
+  } 
+
+  return res.status(401).json({ errors: { form: 'Invalid Credentials' } });
+});
 
 ///АДМИНКА
 router.get('/', auth, function (req, res) {
