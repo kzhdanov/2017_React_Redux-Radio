@@ -10,7 +10,6 @@ export function login(payload) {
 			},
 			body: JSON.stringify(payload)
 		})
-	    .then(response => response.json())
-	    .then(payload => dispatch({ type: CONST.LOGIN, payload }))
+	    .then((response) => response.json());
 	}
 }

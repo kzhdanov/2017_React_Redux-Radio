@@ -18,6 +18,10 @@ class Admin extends React.Component {
 	constructor(props) {
     	super(props);
 
+    	this.state = {
+      		error: ''
+    	};
+
     	this.handelLoginSubmit = this.handelLoginSubmit.bind(this);
   	}
 
@@ -26,14 +30,22 @@ class Admin extends React.Component {
 		let pass = this.password.input.value;
 
 		this.props.login( { login, pass } ).then(
-			(res) => this.context.router.push('/radio_admin/list'),
+			(res) => { 
+					if(res.errors && res.errors.form)  
+						this.setState({ error: res.errors.form }); 
+					else 
+						this.context.router.push('/radio_admin/list');
+				},
 			(err) => console.log(err)
-		)
+			);
 	}
 
 	render() {
+		const { error } = this.state;
+
 		return(
 			<div className='admin__loginform'>
+				{error && <span>{error}</span>}
 				<MuiThemeProvider muiTheme={muiTheme}>
 					<div>
 						<TextField hintText="Login" ref={(login) => { this.login = login; }}/>
