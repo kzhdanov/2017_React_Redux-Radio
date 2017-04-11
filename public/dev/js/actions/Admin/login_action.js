@@ -10,6 +10,15 @@ export function login(payload) {
 			},
 			body: JSON.stringify(payload)
 		})
-	    .then((response) => response.json());
+	    .then((response) => response.json())
+	    .then(payload => {
+	    	if(payload.token) {
+	    		const token = payload.token;
+      			localStorage.setItem('jwtToken', token);
+      			
+      			dispatch({type: CONST.LOGIN, true});	    	
+      		}
+	    	return payload;
+	    })
 	}
 }

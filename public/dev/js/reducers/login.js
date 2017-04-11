@@ -1,8 +1,15 @@
-export default function login (state = {}, action) {
+import CONST from '../constants/CONSTANTS';
+
+const initialState = {
+  isAuthenticated: false,
+};
+
+export default function login (state = initialState, action) {
 	switch(action.type) {
-		case 'LOGIN': 
-			console.log(action.payload);
-			return state;		
+		case CONST.LOGIN: 
+			return {
+		       isAuthenticated: true,
+      		};	
 			break;
 		default: 
 			return state;

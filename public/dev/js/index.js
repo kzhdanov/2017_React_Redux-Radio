@@ -8,13 +8,16 @@ import { Router, hashHistory } from 'react-router';
 import routes from './routers';
 import allReducers from './reducers';
 import thunkMiddleware from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
 
 const store = createStore(
 	allReducers,
-	applyMiddleware(thunkMiddleware)
+	composeWithDevTools(
+    	applyMiddleware(thunkMiddleware)
+  	)
 );		
     
 ReactDOM.render(
