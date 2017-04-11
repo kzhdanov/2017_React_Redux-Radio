@@ -1,6 +1,8 @@
+import CONST from '../constants/CONSTANTS';
+
 export default function weeks (state = {}, action) {
 	switch(action.type) {
-		case 'GET_WEEKS_REQUEST': 
+		case CONST.GET_WEEKS_REQUEST: 
 			if (!state.weeks) {
 				return { 
 					wn: action.payload.weekNumber,
@@ -16,7 +18,7 @@ export default function weeks (state = {}, action) {
 		    	return state;
 		    }
 			break;
-		case 'GET_PREV_WEEK_REQUEST':
+		case CONST.GET_PREV_WEEK_REQUEST:
 			return { 
 				wn: action.payload.weekNumber,
 				fn: action.payload.fullNumber,
