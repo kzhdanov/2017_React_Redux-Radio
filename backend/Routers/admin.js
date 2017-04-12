@@ -33,19 +33,36 @@ router.post('/login', function (req, res) {
   return res.status(401).json({ errors: { form: 'Invalid Credentials' } });
 });
 
-///АДМИНКА
-router.get('/', auth, function (req, res) {
+router.post('/checkToken', function(req, res) {
+  if(req.body && req.body.token) {
+    try {
+      var decoded = jwt.verify(req.body.token, conf.jwtSecret);
+
+      if(decoded && decoded.username === tempAuth.login)
+        return res.json({ isAuth: true });
+      
+    } catch(ex) {
+      return res.status(401).json({ errors: 'Invalid token', isAuth: false });
+    }
+  }
+})
+
+///Получим недели
+router.get('/getWeek', function (req, res) {
   album.GetLastWeekNumber(null, function (err, weekNumber) {
     if (!err) {
       if (weekNumber[0].Number !== null) {
         album.GetAlbumsByWeekAll(weekNumber[0].Number, function (err, al) {
-          if (!err)
-            res.render('Admin.ejs', { Albums: al });
+          if (!err) {
+            setTimeout(function () {
+              res.json(al);
+            }, 1000)
+          }
           else
             console.log(err);
         });
       } else {
-        res.render('Admin.ejs', { Albums: null });
+        return res.status(401).json({ errors: 'week number error' });
       }
     } else {
       console.log(error);
