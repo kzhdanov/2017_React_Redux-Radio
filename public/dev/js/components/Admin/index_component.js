@@ -19,7 +19,7 @@ class Admin extends React.Component {
     	super(props);
 
     	this.state = {
-      		error: ''
+      		error: this.props.errorMsg
     	};
 
     	this.handelLoginSubmit = this.handelLoginSubmit.bind(this);
@@ -40,12 +40,18 @@ class Admin extends React.Component {
 			);
 	}
 
+	componentWillReceiveProps(nextProps) {
+		//if(nextProps.isAuth)
+			//this.context.router.push('/radio_admin/list');
+	}
+
 	render() {
 		const { error } = this.state;
 
+		console.log('login')
 		return(
 			<div className='admin__loginform'>
-				{error && <span>{error}</span>}
+				{ error && <span>{error}</span> }
 				<MuiThemeProvider muiTheme={muiTheme}>
 					<div>
 						<TextField hintText="Login" ref={(login) => { this.login = login; }}/>
@@ -66,4 +72,11 @@ Admin.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-export default connect(null, { login })(Admin);
+function mapStateToProps(state) {
+    return {
+      errorMsg: state.Login.errorMsg,
+      //isAuth: state.Login.isAuthenticated
+    };
+  }
+
+export default connect(mapStateToProps, { login })(Admin);
