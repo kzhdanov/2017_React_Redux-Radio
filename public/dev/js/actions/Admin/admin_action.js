@@ -9,9 +9,6 @@ export function GetWeek(payload) {
 			}
 		})
 	    .then((response) => response.json())
-	    .then(payload => {
-	    	console.log(payload);
-	    	return payload;
-	    })
+	    .then(payload =>  payload);
 	}
 }
