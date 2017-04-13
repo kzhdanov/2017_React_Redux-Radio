@@ -14,7 +14,7 @@ const muiTheme = getMuiTheme({
   }
 })
 
-class Admin extends React.Component {
+class Login extends React.Component {
 	constructor(props) {
     	super(props);
 
@@ -68,7 +68,7 @@ class Admin extends React.Component {
 	}
 }
 
-Admin.contextTypes = {
+Login.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
@@ -79,4 +79,4 @@ function mapStateToProps(state) {
     };
   }
 
-export default connect(mapStateToProps, { login })(Admin);
+export default connect(mapStateToProps, { login })(Login);
