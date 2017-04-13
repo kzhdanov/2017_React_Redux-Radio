@@ -5,10 +5,11 @@
 }
 
 .albums__container {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
+	width: 60%;
+	display: -webkit-inline-box;
+	display: -webkit-inline-flex;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
 	-webkit-flex-wrap: wrap;
 	    -ms-flex-wrap: wrap;
 	        flex-wrap: wrap;
@@ -28,4 +29,39 @@
 	-webkit-align-items: flex-start;
 	    -ms-flex-align: start;
 	        align-items: flex-start;
+}
+
+.albums__card {
+	display: -webkit-inline-box;
+	display: -webkit-inline-flex;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	width: 38%;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	position: fixed;
+    top: 20%;
+}
+
+.current {
+	background-color: #efefef;
+}
+
+.progress {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	margin-top: 40%;
 }

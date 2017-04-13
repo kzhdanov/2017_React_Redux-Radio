@@ -40,9 +40,14 @@ class Login extends React.Component {
 			);
 	}
 
+	componentWillMount() {
+		if(this.props.isAuth)
+    		this.context.router.push('/radio_admin/list');
+	}
+
 	componentWillReceiveProps(nextProps) {
-		//if(nextProps.isAuth)
-			//this.context.router.push('/radio_admin/list');
+		if(nextProps.isAuth)
+			this.context.router.replace('/radio_admin/list');
 	}
 
 	render() {
@@ -75,7 +80,7 @@ Login.contextTypes = {
 function mapStateToProps(state) {
     return {
       errorMsg: state.Login.errorMsg,
-      //isAuth: state.Login.isAuthenticated
+      isAuth: state.Login.isAuthenticated
     };
   }
 

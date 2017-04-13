@@ -31,12 +31,15 @@ export function AuthError(payload) {
 }
 
 export function CheckAuth(token) {
-    return fetch(CONST._CHECK_AUTH_URL, {
-	   	method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({ token: token })
-	})
-	.then((response) => response.json())
+	return dispatch => {
+	    return fetch(CONST._CHECK_AUTH_URL, {
+		   	method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ token: token })
+		})
+		.then((response) => response.json())
+		.then(payload => dispatch({ type: CONST.LOGIN, payload: payload.isAuth }))
+	}
 }

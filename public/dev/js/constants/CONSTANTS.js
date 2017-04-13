@@ -6,6 +6,7 @@ const constants =
 	_LOGIN_URL: 'http://localhost:8085/RadioAdmin/login',
 	_CHECK_AUTH_URL: 'http://localhost:8085/RadioAdmin/checkToken',
 	_GET_WEEK: 'http://localhost:8085/RadioAdmin/getWeek',
+	_GET_WEEK_BY_NUMBER: 'http://localhost:8085/RadioAdmin/getWeekByNumber',
 	UPDATE_TITLES: 'UPDATE_TITLES',
 	GET_WEEKS_REQUEST: 'GET_WEEKS_REQUEST',
 	GET_PREV_WEEK_REQUEST: 'GET_PREV_WEEK_REQUEST',

@@ -6,11 +6,13 @@ import Login from '../components/Admin/login_component';
 import AdminListPage from '../components/Admin/albums_list_component';
 
 import Authenticate from '../utils/admin_utils';
-//Authenticate()
+
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={AppContainer} />
-	<Route path='/radio_admin' component={Login} />
-	<Route path='/radio_admin/list' component={AdminListPage} />
+    <Route path='radio_admin'>
+    	<IndexRoute component={Login} />
+		<Route path='list' component={Authenticate(AdminListPage)} />
+	</Route>
   </Route>
 )
