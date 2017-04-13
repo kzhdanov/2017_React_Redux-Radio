@@ -71,10 +71,10 @@ router.get('/getWeek', function (req, res) {
 });
 
 ///ПОИСК
-router.post('/Get', auth, function (req, res) {
+router.post('/getWeekByNumber', function (req, res) {
   album.GetAlbumsByWeekAll(req.body.week, function (err, al) {
-    if (!err)
-      res.render('./partials/AdminPartial.ejs', { Albums: al });
+    if (!err) 
+      res.json(al);
   });
 });
 
