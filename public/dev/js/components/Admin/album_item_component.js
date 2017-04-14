@@ -9,7 +9,7 @@ export default function AlbumItem({ album, current, editItem }) {
   return (
     <div style={{margin: '20px 20px 0 20px'}}>
       <div className={classnames('albums__item', { current: current })}> 
-        <img style={{width: '250px'}} src={ '/TestCovers/' + album.ImgName.replace(/ /g,"%20") } alt="Album Cover" />
+        <img style={{width: '250px', height: '250px'}} src={ '/TestCovers/' + album.ImgName.replace(/ /g,"%20") } alt="Album Cover" />
         
         <div style={{marginLeft: '20px'}}>
           <span>{ album.BandName }</span><br/>
