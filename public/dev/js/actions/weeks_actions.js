@@ -12,7 +12,6 @@ export function getPrevWeek(weekNum) {
 	return dispatch => {
 	    return fetch(CONST._GET_PREV_WEEK, {
 		   	method: 'POST', 
-			mode: 'cors', 
 			headers: {
 				'Content-Type': 'application/json'
 			},

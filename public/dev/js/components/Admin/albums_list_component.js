@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { GetWeek, GetWeekByNumber } from '../../actions/Admin/admin_action';
+import { GetWeek, GetWeekByNumber, SaveAlbum, DeleteAlbum } from '../../actions/Admin/admin_action';
 import CircularProgress from 'material-ui/CircularProgress';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
@@ -47,6 +47,7 @@ class List extends React.Component {
 		this.handleChangeCB = this.handleChangeCB.bind(this);
 		this.saveCard = this.saveCard.bind(this);
 		this.resetCard = this.resetCard.bind(this);
+		this.deleteItem = this.deleteItem.bind(this);
   	}
 
   	editItem(id) {
@@ -100,15 +101,26 @@ class List extends React.Component {
 
   		if(!this.state.activeElement.WeekNumber || 
   			this.state.activeElement.WeekNumber == this.state.currentWeekNumber) {
-			
+
+  			this.state.activeElement.WeekNumber = this.state.currentWeekNumber;
 			this.setState({ 
 	  			albums: [this.state.activeElement].concat(this.state.albums),
 	  			hasActive: false,
 	  			activeElement: {}
   			});
   		}
+  		this.props.SaveAlbum(this.state.activeElement);
+  	}
 
-
+  	deleteItem(id) {
+  		const elements = this.state.albums.filter((el) => el.id !== id);
+  		this.setState({ 
+  			albums: elements,
+  			hasActive: false,
+  			activeElement: {}
+  		});
+  		
+  		this.props.DeleteAlbum(id);
   	}
 
 	render() {
@@ -148,6 +160,7 @@ class List extends React.Component {
 								album={al}
 								current={al.id === this.state.activeElement.id}
 								editItem={this.editItem} 
+								deleteItem={this.deleteItem}
 								key={al.id}
 							/>) }
 					</div>
@@ -171,4 +184,11 @@ class List extends React.Component {
 	}
 }
 
-export default connect(null, { GetWeek, GetWeekByNumber })(List);
+List.propTypes = {
+  GetWeek: React.PropTypes.func.isRequired,
+  GetWeekByNumber: React.PropTypes.func.isRequired,
+  SaveAlbum: React.PropTypes.func.isRequired,
+  DeleteAlbum: React.PropTypes.func.isRequired,
+}
+
+export default connect(null, { GetWeek, GetWeekByNumber, SaveAlbum, DeleteAlbum })(List);

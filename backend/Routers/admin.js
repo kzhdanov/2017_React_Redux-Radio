@@ -4,7 +4,6 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var conf = require('../config');
-var utils = require('../Utils');
 var pool = mysql.createPool(conf);
 var jwt = require('jsonwebtoken');
 //import config from '../config';
@@ -79,10 +78,10 @@ router.post('/getWeekByNumber', function (req, res) {
 });
 
 ///СОХРАНЕНИЕ НОВОГО ЭЛЕМЕНТА
-router.post('/Save', auth, function (req, res) {
+router.post('/Save', function (req, res) {
   try {
-    if (req.body.album != null) {
-      var reqAlbum = qs.parse(req.body.album);
+    if (req.body != null) {
+      var reqAlbum = req.body;
 
       if (reqAlbum.IsVisible)
         reqAlbum.IsVisible = true;
@@ -90,10 +89,25 @@ router.post('/Save', auth, function (req, res) {
         reqAlbum.IsVisible = false;
 
       reqAlbum.dateCreate = new Date();
-      reqAlbum.id = utils.Guid();
 
       album.SaveAlbum(reqAlbum, function (error, data) {
         if (!error)
+          res.json({ type: 'success' });
+        else
+          res.json({ type: 'error' });
+      });
+    }
+  } catch (e) {
+    res.json({ type: 'error' });
+  }
+});
+
+///УДАЛЕНИЕ
+router.post('/Delete', function (req, res) {
+  try {
+    if (req.body.id) {
+      album.DeleteAlbum(req.body.id, function (err, data) {
+        if (!err)
           res.json({ type: 'success' });
         else
           res.json({ type: 'error' });
@@ -132,22 +146,6 @@ router.post('/EditSave', auth, function (req, res) {
         reqAlbum.IsVisible = false;
 
       album.EditAlbumSave([reqAlbum, reqAlbum.id], function (err, data) {
-        if (!err)
-          res.json({ type: 'success' });
-        else
-          res.json({ type: 'error' });
-      });
-    }
-  } catch (e) {
-    res.json({ type: 'error' });
-  }
-});
-
-///УДАЛЕНИЕ
-router.post('/Delete', auth, function (req, res) {
-  try {
-    if (req.body.id) {
-      album.DeleteAlbum(req.body.id, function (err, data) {
         if (!err)
           res.json({ type: 'success' });
         else
