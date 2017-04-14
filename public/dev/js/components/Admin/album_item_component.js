@@ -5,7 +5,7 @@ import Visibility from 'material-ui/svg-icons/action/visibility';
 import VisibilityOff from 'material-ui/svg-icons/action/visibility-off';
 import classnames from 'classnames';
 
-export default function AlbumItem({ album, current, editItem }) {
+export default function AlbumItem({ album, current, editItem, deleteItem }) {
   return (
     <div style={{margin: '20px 20px 0 20px'}}>
       <div className={classnames('albums__item', { current: current })}> 
@@ -28,7 +28,9 @@ export default function AlbumItem({ album, current, editItem }) {
             primary={true} style={{width: '200px', marginBottom: '10px'}}
             onClick={() => editItem(album.id)}
           /><br/>
-          <RaisedButton label="Удалить" secondary={true} style={{width: '200px'}}/>
+          <RaisedButton label="Удалить" secondary={true} style={{width: '200px'}}
+            onClick={() => deleteItem(album.id)}
+          />
         </div>
       </div>
     </div>
@@ -38,5 +40,6 @@ export default function AlbumItem({ album, current, editItem }) {
 AlbumItem.propTypes = {
   album: React.PropTypes.object.isRequired,
   current: React.PropTypes.bool.isRequired,
-  editItem: React.PropTypes.func.isRequired
+  editItem: React.PropTypes.func.isRequired,
+  deleteItem: React.PropTypes.func.isRequired
 }
