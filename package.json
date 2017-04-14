@@ -36,6 +36,7 @@
     "material-ui": "^0.17.1",
     "mysql": "^2.11.1",
     "node-internet-radio": "^0.1.4",
+    "node-uuid": "^1.4.8",
     "querystring": "^0.2.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",

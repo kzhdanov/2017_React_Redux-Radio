@@ -9,6 +9,7 @@ import { orange500 } from 'material-ui/styles/colors';
 import AlbumItem from './album_item_component';
 import AlbumCardNewEdit from './album_card_component';
 import RaisedButton from 'material-ui/RaisedButton';
+import {default as UUID} from "node-uuid";
 
 import './admin.css';
 
@@ -27,14 +28,25 @@ class List extends React.Component {
       		isLoading: true,
       		activeElement: {},
       		hasActive: false,
+      		currentWeekNumber: 0
     	};
 
 		this.props.GetWeek().then((al) => {
-			this.setState({ albums: al, isLoading: false, activeElement: {} });
+			const cwn = al[0].WeekNumber;
+
+			this.setState({ 
+				albums: al, 
+				isLoading: false, 
+				activeElement: {},
+				currentWeekNumber: cwn
+			});
 		});
 
 		this.editItem = this.editItem.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.handleChangeCB = this.handleChangeCB.bind(this);
+		this.saveCard = this.saveCard.bind(this);
+		this.resetCard = this.resetCard.bind(this);
   	}
 
   	editItem(id) {
@@ -48,12 +60,55 @@ class List extends React.Component {
   		this.setState({ activeElement: el, hasActive: true });
   	}
 
+  	handleChangeCB(e) {
+  		const el = this.state.activeElement;
+  		el[e.target.name] = !el[e.target.name];
+  		this.setState({ activeElement: el, hasActive: true });
+  	}
+
+  	resetCard() {
+  		this.setState({ activeElement: {}, hasActive: false });
+  	}
+
   	searchWeekByNumber() {
+  		if(!this.weekNumber.input.value)
+  			return;
+
+  		let week = this.weekNumber.input.value;
+
   		this.setState({ isLoading: true, activeElement: {} });
 
-  		this.props.GetWeekByNumber(this.weekNumber.input.value).then((al) => {
-			this.setState({ albums: al, isLoading: false, activeElement: {} });
+  		this.props.GetWeekByNumber(week).then((al) => {
+  			if(al && al.length > 0) {
+	  			const cwn = al[0].WeekNumber;
+
+				this.setState({ 
+					albums: al, isLoading: false, activeElement: {},
+					currentWeekNumber: cwn 
+				});
+			} else {
+				this.setState({ 
+					albums: [], isLoading: false, activeElement: {},
+					currentWeekNumber: `${week}. По этой неделе альбомов не найдено!` 
+				});
+			}
 		});
+  	}
+
+  	saveCard() {
+  		this.state.activeElement.id = UUID.v4();
+
+  		if(!this.state.activeElement.WeekNumber || 
+  			this.state.activeElement.WeekNumber == this.state.currentWeekNumber) {
+			
+			this.setState({ 
+	  			albums: [this.state.activeElement].concat(this.state.albums),
+	  			hasActive: false,
+	  			activeElement: {}
+  			});
+  		}
+
+
   	}
 
 	render() {
@@ -74,6 +129,7 @@ class List extends React.Component {
 							<TextField
 						    	hintText="Введите номер недели"
 						    	floatingLabelText="Поиск по номеру недели"
+						    	type='number'
 						    	style={{width: '200px'}}
 						    	ref={(weekNumber) => { this.weekNumber = weekNumber }}
 							/>
@@ -84,7 +140,9 @@ class List extends React.Component {
 								onClick={() => this.searchWeekByNumber()}
 							/>
 						</div>
-						<div style={{marginLeft: '20px', marginTop: '20px'}}>Неделя: { albums[0].WeekNumber }</div>
+						<div style={{marginLeft: '20px', marginTop: '20px'}}>
+							Неделя: { this.state.currentWeekNumber }
+						</div>
 						{ albums.map((al) => 
 							<AlbumItem 
 								album={al}
@@ -97,6 +155,9 @@ class List extends React.Component {
 											  this.state.activeElement : {}
 											}
 									  handleChange={ this.handleChange } 
+									  resetCard={ this.resetCard }
+									  handleChangeCB={ this.handleChangeCB }
+									  saveCard={ this.saveCard }
 					/>
 				</div>
 			);
