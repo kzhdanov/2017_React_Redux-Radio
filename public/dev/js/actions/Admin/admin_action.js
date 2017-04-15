@@ -52,3 +52,16 @@ export function DeleteAlbum(id) {
 	    .then(response => response.json())
 	}
 }
+
+export function EditAlbum(album) {
+	return dispatch => {
+	    return fetch(CONST._EDIT_ALBUM, {
+		   	method: 'POST', 
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(album),
+		})
+	    .then(response => response.json())
+	}
+}

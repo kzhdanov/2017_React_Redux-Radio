@@ -10,7 +10,7 @@ import VisibilityOff from 'material-ui/svg-icons/action/visibility-off';
 import './admin.css';
 
 export default function AlbumCardNewEdit(
-  { album, handleChange, resetCard, handleChangeCB, saveCard }) { 
+  { album, handleChange, resetCard, handleChangeCB, saveCard, editCard }) { 
   const hasAl = album.id ? true : false;
 
   return (
@@ -78,7 +78,9 @@ export default function AlbumCardNewEdit(
         onCheck={ (e) => handleChangeCB(e) }
       />
       { hasAl ? 
-        <RaisedButton label="Изменить" primary={true} className='edit__card-btn' /> :
+        <RaisedButton label="Изменить" primary={true} className='edit__card-btn' 
+          onClick={ () => editCard() }
+        /> :
         <RaisedButton label="Создать" primary={true} className='edit__card-btn' 
           onClick={ () => saveCard() }
         />
@@ -92,4 +94,5 @@ AlbumCardNewEdit.propTypes = {
   handleChange: React.PropTypes.func.isRequired,
   handleChangeCB: React.PropTypes.func.isRequired,
   resetCard: React.PropTypes.func.isRequired,
+  editCard: React.PropTypes.func.isRequired,
 }

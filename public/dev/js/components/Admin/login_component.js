@@ -60,7 +60,10 @@ class Login extends React.Component {
 				<MuiThemeProvider muiTheme={muiTheme}>
 					<div>
 						<TextField hintText="Login" ref={(login) => { this.login = login; }}/>
-						<TextField hintText="Password" ref={(password) => { this.password = password; }}/>
+						<TextField 
+							hintText="Password" 
+							type="password"
+							ref={(password) => { this.password = password; }}/>
 						<RaisedButton label="Log in" 
 						 primary={true} 
 						 style={{marginLeft: '170px', marginTop: '15px'}} 
