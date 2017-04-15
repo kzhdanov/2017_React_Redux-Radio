@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { GetWeek, GetWeekByNumber, SaveAlbum, DeleteAlbum } from '../../actions/Admin/admin_action';
+import { GetWeek, GetWeekByNumber, SaveAlbum, DeleteAlbum, EditAlbum } from '../../actions/Admin/admin_action';
 import CircularProgress from 'material-ui/CircularProgress';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
@@ -27,6 +27,7 @@ class List extends React.Component {
 			albums: [],
       		isLoading: true,
       		activeElement: {},
+      		beforeActiveElement: {},
       		hasActive: false,
       		currentWeekNumber: 0
     	};
@@ -48,11 +49,16 @@ class List extends React.Component {
 		this.saveCard = this.saveCard.bind(this);
 		this.resetCard = this.resetCard.bind(this);
 		this.deleteItem = this.deleteItem.bind(this);
+		this.editCard = this.editCard.bind(this);
   	}
 
   	editItem(id) {
   		const currentEl = this.state.albums.filter((el) => el.id === id);
-  		this.setState({ activeElement: currentEl[0], hasActive: true });
+  		this.setState({ 
+  			activeElement: currentEl[0], 
+  			hasActive: true, 
+  			beforeActiveElement: Object.assign({}, currentEl[0]) 
+  		});
   	}
 
   	handleChange(e) {
@@ -68,7 +74,24 @@ class List extends React.Component {
   	}
 
   	resetCard() {
-  		this.setState({ activeElement: {}, hasActive: false });
+  		this.state.albums.map((el) => { 
+  			if(el.id === this.state.activeElement.id) {
+  				const bae = this.state.beforeActiveElement;
+	  				el.AlbumName = bae.AlbumName;
+	  				el.BandName = bae.BandName;
+	  				el.Genres = bae.Genres;
+	  				el.ImgName = bae.ImgName;
+	  				el.IsVisible = bae.IsVisible;
+	  				el.WeekNumber = bae.WeekNumber;
+	  				el.Year = bae.Year;
+  			}
+  		});
+  		
+  		this.setState({ 
+  			activeElement: {}, 
+  			hasActive: false, 
+  			beforeActiveElement: {} 
+  		});
   	}
 
   	searchWeekByNumber() {
@@ -110,6 +133,14 @@ class List extends React.Component {
   			});
   		}
   		this.props.SaveAlbum(this.state.activeElement);
+  	}
+
+  	editCard() {
+  		if(this.state.activeElement) {
+  			this.props.EditAlbum(this.state.activeElement);
+
+  			this.setState({ activeElement: {}, hasActive: false });
+  		}
   	}
 
   	deleteItem(id) {
@@ -171,6 +202,7 @@ class List extends React.Component {
 									  resetCard={ this.resetCard }
 									  handleChangeCB={ this.handleChangeCB }
 									  saveCard={ this.saveCard }
+									  editCard={ this.editCard }
 					/>
 				</div>
 			);
@@ -189,6 +221,8 @@ List.propTypes = {
   GetWeekByNumber: React.PropTypes.func.isRequired,
   SaveAlbum: React.PropTypes.func.isRequired,
   DeleteAlbum: React.PropTypes.func.isRequired,
+  EditAlbum: React.PropTypes.func.isRequired,
 }
 
-export default connect(null, { GetWeek, GetWeekByNumber, SaveAlbum, DeleteAlbum })(List);
+export default connect(null, { 
+	GetWeek, GetWeekByNumber, SaveAlbum, DeleteAlbum, EditAlbum })(List);

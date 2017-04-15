@@ -32,6 +32,7 @@ router.post('/login', function (req, res) {
   return res.status(401).json({ errors: { form: 'Invalid Credentials' } });
 });
 
+///ПРОВЕРКА ТОКЕНА
 router.post('/checkToken', function(req, res) {
   if(req.body && req.body.token) {
     try {
@@ -46,7 +47,7 @@ router.post('/checkToken', function(req, res) {
   }
 })
 
-///Получим недели
+///ПОЛУЧИМ НЕДЕЛЮ
 router.get('/getWeek', function (req, res) {
   album.GetLastWeekNumber(null, function (err, weekNumber) {
     if (!err) {
@@ -69,7 +70,7 @@ router.get('/getWeek', function (req, res) {
   });
 });
 
-///ПОИСК
+///ПОИСК НЕДЕЛИ ПО НОМЕРУ
 router.post('/getWeekByNumber', function (req, res) {
   album.GetAlbumsByWeekAll(req.body.week, function (err, al) {
     if (!err) 
@@ -118,27 +119,11 @@ router.post('/Delete', function (req, res) {
   }
 });
 
-///ПОЛУЧЕНИЕ СУЩЕТВУЮЩЕЙ СУЩЬНОСТИ ДЛЯ РЕДАКТИРОВАНИЯ
-router.post('/Edit', auth, function (req, res) {
-  try {
-    if (req.body.id != null) {
-      album.GetAlbumById(req.body.id, function (err, data) {
-        if (!err)
-          res.json({ type: 'success', data: data });
-        else
-          res.json({ type: 'error' });
-      });
-    }
-  } catch (e) {
-    res.json({ type: 'error' });
-  }
-});
-
 ///РЕДАКТИРОВАНИЕ СУЩЕТВУЮЩЕЙ СУЩЬНОСТИ
-router.post('/EditSave', auth, function (req, res) {
+router.post('/Edit', function (req, res) {
   try {
-    if (req.body.album) {
-      var reqAlbum = qs.parse(req.body.album);
+    if (req.body) {
+      var reqAlbum = req.body;
 
       if (reqAlbum.IsVisible)
         reqAlbum.IsVisible = true;

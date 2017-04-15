@@ -9,6 +9,7 @@ const constants =
 	_GET_WEEK_BY_NUMBER: 'http://localhost:8085/RadioAdmin/getWeekByNumber',
 	_SAVE_ALBUM: 'http://localhost:8085/RadioAdmin/Save',
 	_DELETE_ALBUM: 'http://localhost:8085/RadioAdmin/Delete',
+	_EDIT_ALBUM: 'http://localhost:8085/RadioAdmin/Edit',
 	UPDATE_TITLES: 'UPDATE_TITLES',
 	GET_WEEKS_REQUEST: 'GET_WEEKS_REQUEST',
 	GET_PREV_WEEK_REQUEST: 'GET_PREV_WEEK_REQUEST',
