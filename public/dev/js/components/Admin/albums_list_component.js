@@ -9,7 +9,7 @@ import { orange500 } from 'material-ui/styles/colors';
 import AlbumItem from './album_item_component';
 import AlbumCardNewEdit from './album_card_component';
 import RaisedButton from 'material-ui/RaisedButton';
-import {default as UUID} from "node-uuid";
+import { default as UUID } from "node-uuid";
 
 import './admin.css';
 
@@ -33,6 +33,11 @@ class List extends React.Component {
     	};
 
 		this.props.GetWeek().then((al) => {
+			if(al.error) {
+				alert(al.error);
+				return null;
+			}
+
 			const cwn = al[0].WeekNumber;
 
 			this.setState({ 
@@ -113,7 +118,7 @@ class List extends React.Component {
 			} else {
 				this.setState({ 
 					albums: [], isLoading: false, activeElement: {},
-					currentWeekNumber: `${week}. По этой неделе альбомов не найдено!` 
+					currentWeekNumber: `${week}, ${ al.error ? 'error: ' + al.error : 'для этой недели альбомов не найдено' }` 
 				});
 			}
 		});
@@ -184,7 +189,7 @@ class List extends React.Component {
 							/>
 						</div>
 						<div style={{marginLeft: '20px', marginTop: '20px'}}>
-							Неделя: { this.state.currentWeekNumber }
+							Неделя: <span style={{ color: 'red' }}>{ this.state.currentWeekNumber }</span>
 						</div>
 						{ albums.map((al) => 
 							<AlbumItem 

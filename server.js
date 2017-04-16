@@ -5,12 +5,6 @@ var bodyParser = require('body-parser');
 var radioLink = 'http://eu3.radioboss.fm:8022/live';
 var ws = require('./backend/ws');
 var compression = require('compression');
-//var mysql = require('mysql');
-//var conf = require('./backend/config');
-//var pool = mysql.createPool(conf);
-//var rating = require('./backend/Models/RatingModel')(pool);
-//var album = require('./backend/Models/AlbumModel')(pool);
-//var utils = require('./backend/Utils');
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
