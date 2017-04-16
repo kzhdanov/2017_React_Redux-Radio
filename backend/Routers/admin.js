@@ -1,20 +1,13 @@
-var basicAuth = require('basic-auth-connect');
-var qs = require('querystring');
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var conf = require('../config');
 var pool = mysql.createPool(conf);
 var jwt = require('jsonwebtoken');
-//import config from '../config';
-///АДМИНИСТРАТИВНАЯ ЧАСТЬ///
-var tempAuth = {
-  login: 'Ivan',
-  password: 'EgorLetov@!'
-}
-
-var auth = basicAuth('Ivan', 'EgorLetov@!');
 var album = require('../Models/AlbumModel')(pool);
+
+///АДМИНИСТРАТИВНАЯ ЧАСТЬ///
+var tempAuth = { login: 'Ivan', password: 'EgorLetov@!' };
 
 ///ЛОГИН
 router.post('/login', function (req, res) {
@@ -53,20 +46,17 @@ router.get('/getWeek', function (req, res) {
     if (!err) {
       if (weekNumber[0].Number !== null) {
         album.GetAlbumsByWeekAll(weekNumber[0].Number, function (err, al) {
-          if (!err) {
-            setTimeout(function () {
-              res.json(al);
-            }, 1000)
-          }
+          if (!err)
+            res.json(al);
           else
-            console.log(err);
+            return res.json({ error: 'something went wrong' });
         });
-      } else {
-        return res.status(401).json({ errors: 'week number error' });
-      }
-    } else {
-      console.log(error);
-    }
+      } else
+        return res.json({ error: 'week number error #2' });
+
+    } else 
+      return res.json({ error: 'week number error #1' });
+    
   });
 });
 
@@ -74,7 +64,9 @@ router.get('/getWeek', function (req, res) {
 router.post('/getWeekByNumber', function (req, res) {
   album.GetAlbumsByWeekAll(req.body.week, function (err, al) {
     if (!err) 
-      res.json(al);
+      res.json(al)
+    else
+      return res.json({ error: 'get week by number error' });
   });
 });
 
@@ -93,13 +85,13 @@ router.post('/Save', function (req, res) {
 
       album.SaveAlbum(reqAlbum, function (error, data) {
         if (!error)
-          res.json({ type: 'success' });
+          res.json({ error: 'success' });
         else
-          res.json({ type: 'error' });
+          res.json({ error: 'saving error' });
       });
     }
   } catch (e) {
-    res.json({ type: 'error' });
+    res.json({ error: 'saving error catch blok' });
   }
 });
 
